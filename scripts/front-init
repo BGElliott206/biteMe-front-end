@@ -1,0 +1,118 @@
+#!/bin/bash
+
+if [ $1 ]
+then
+  mkdir $1
+  cd $1
+fi
+
+npm init -y
+ex -s -c '7i|    "lint": "eslint 'src/**/*.js'",' -c x package.json
+ex -s -c '7i|    "build": "react-scripts build",' -c x package.json
+ex -s -c '7i|    "start": "react-scripts start",' -c x package.json
+
+mkdir src
+touch src/index.js
+echo "import React from 'react';" >> src/index.js
+echo "import ReactDOM from 'react-dom';" >> src/index.js
+echo "" >> src/index.js
+echo "const App = () => {" >> src/index.js
+echo "  return <h1>My React App!!</h1>;" >> src/index.js
+echo "};" >> src/index.js
+echo "" >> src/index.js
+echo "const root = document.getElementById('root');" >> src/index.js
+echo "ReactDOM.render(<App />, root);" >> src/index.js
+
+mkdir public
+touch public/index.html
+echo "<!DOCTYPE html>" >> public/index.html
+echo "<html lang=\"en\">" >> public/index.html
+echo "" >> public/index.html
+echo "<head>" >> public/index.html
+echo "  <meta charset=\"UTF-8\">" >> public/index.html
+echo "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" >> public/index.html
+echo "  <meta http-equiv=\"X-UA-Compatible\" content=\"ie-edge\">" >> public/index.html
+echo "  <title>React Project</title>" >> public/index.html
+echo "</head>" >> public/index.html
+echo "" >> public/index.html
+echo "<body>" >> public/index.html
+echo "  <div id=\"root\"></div>" >> public/index.html
+echo "</body>" >> public/index.html
+echo "" >> public/index.html
+echo "</html>" >> public/index.html
+
+touch .gitignore
+echo "# Node React gitignore" >> .gitignore
+echo "" >> .gitignore
+echo "node_modules/" >> .gitignore
+echo "npm-debug.log*" >> .gitignore
+echo ".npm" >> .gitignore
+echo ".env" >> .gitignore
+echo ".idea/" >> .gitignore
+
+touch .eslintrc.json
+echo "{" >> .eslintrc.json
+echo "  \"extends\": [" >> .eslintrc.json
+echo "    \"airbnb-base\"," >> .eslintrc.json
+echo "    \"plugin:jest/recommended\"," >> .eslintrc.json
+echo "    \"plugin:react/recommended\"" >> .eslintrc.json
+echo "  ]," >> .eslintrc.json
+echo "  \"env\": {" >> .eslintrc.json
+echo "    \"browser\": true" >> .eslintrc.json
+echo "  }," >> .eslintrc.json
+echo "  \"settings\": {" >> .eslintrc.json
+echo "    \"react\": {" >> .eslintrc.json
+echo "      \"version\": \"16.8.2\"" >> .eslintrc.json
+echo "    }" >> .eslintrc.json
+echo "  }," >> .eslintrc.json
+echo "  \"parser\": \"babel-eslint\"," >> .eslintrc.json
+echo "  \"plugins\": [" >> .eslintrc.json
+echo "    \"jest\"," >> .eslintrc.json
+echo "    \"react\"" >> .eslintrc.json
+echo "  ]," >> .eslintrc.json
+echo "  \"parserOptions\": {" >> .eslintrc.json
+echo "    \"sourceType\": \"module\"" >> .eslintrc.json
+echo "  }," >> .eslintrc.json
+echo "  \"rules\": {" >> .eslintrc.json
+echo "    \"arrow-body-style\": \"off\"," >> .eslintrc.json
+echo "    \"class-methods-use-this\": \"off\"," >> .eslintrc.json
+echo "    \"global-require\": \"off\"," >> .eslintrc.json
+echo "    \"import/no-extraneous-dependencies\": [" >> .eslintrc.json
+echo "      \"error\"," >> .eslintrc.json
+echo "      {" >> .eslintrc.json
+echo "        \"devDependencies\": true" >> .eslintrc.json
+echo "      }" >> .eslintrc.json
+echo "    ]," >> .eslintrc.json
+echo "    \"linebreak-style\": \"off\"," >> .eslintrc.json
+echo "    \"no-multi-assign\": \"off\"," >> .eslintrc.json
+echo "    \"no-param-reassign\": [" >> .eslintrc.json
+echo "      \"error\"," >> .eslintrc.json
+echo "      {" >> .eslintrc.json
+echo "        \"props\": false" >> .eslintrc.json
+echo "      }" >> .eslintrc.json
+echo "    ]," >> .eslintrc.json
+echo "    \"no-plusplus\": [" >> .eslintrc.json
+echo "      \"error\"," >> .eslintrc.json
+echo "      {" >> .eslintrc.json
+echo "        \"allowForLoopAfterthoughts\": true" >> .eslintrc.json
+echo "      }" >> .eslintrc.json
+echo "    ]," >> .eslintrc.json
+echo "    \"no-trailing-spaces\": \"off\"," >> .eslintrc.json
+echo "    \"no-underscore-dangle\": \"off\"," >> .eslintrc.json
+echo "    \"strict\": \"off\"" >> .eslintrc.json
+echo "  }" >> .eslintrc.json
+echo "}" >> .eslintrc.json
+
+touch .travis.yml
+echo "language: node_js" >> .travis.yml
+echo "node_js:" >> .travis.yml
+echo "  - \"9\"" >> .travis.yml
+echo " " >> .travis.yml
+echo "script:" >> .travis.yml
+echo "  - npm run lint" >> .travis.yml
+echo "  - npm test" >> .travis.yml 
+
+touch README.md 
+
+npm install --save react react-scripts react-dom node-sass
+npm install --save-dev eslint-plugin-react eslint-plugin-jest eslint-config-airbnb-base
